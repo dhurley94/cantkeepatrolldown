@@ -13,7 +13,7 @@ var redditGetter = {
         var params = {
             user: username,
             url: 'https://www.reddit.com/user/' + username + '/about.json'
-        }
+        };
         $.ajax({
                 method: 'GET',
                 url: params.url,
@@ -34,7 +34,28 @@ var redditGetter = {
         var params = {
             user: username,
             url: 'https://www.reddit.com/user/' + username + '/comments.json'
-        }
+        };
+        $.ajax({
+                method: 'GET',
+                url: params.url,
+                dataType: 'json'
+            })
+            .done(function(data) {
+                console.log(data);
+                return data;
+            });
+    },
+    /**
+     * Returns list of all user's posts
+     * contains upvotes vs downvotes
+     * subreddit additional info
+     * Ex; https://www.reddit.com/user/rizse/submitted.json
+     */
+    getUserPosts: function(username) {
+        var params = {
+            user: username,
+            url: 'https://www.reddit.com/user/' + username + '/submitted.json'
+        };
         $.ajax({
                 method: 'GET',
                 url: params.url,
@@ -45,4 +66,8 @@ var redditGetter = {
                 return data;
             });
     }
-}
+};
+
+// var imgurGetter = {
+
+// };
