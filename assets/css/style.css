@@ -5,7 +5,7 @@ html,body{
 }
 
 button{
-    padding: 0px;
+    /*padding: 0px;*/
 }
 
 .form-control{
@@ -26,6 +26,7 @@ button{
 }
 
 #troll-search {
+    
     border-style:ridge;
     border-width: 2px;
     border-color: #b759ff;
@@ -38,23 +39,22 @@ button{
 #troll-search input {
     font-size: 25px;
 }
-#troll-search button {
+
+.button-span {
+    width: 10%;
+}
+.button-span button {
+    color: black;
     background: #c997ef;
     border: none;
     font-size: 25px;
-    /*padding-left: 4%;
-    padding-right: 4%;*/
-    width: 10%;
-}
-
-#troll-search button:hover {
-    background: #b759ff;
-}
-
-.troll-butt-text {
-     padding-left: 4%;
+    padding-left: 4%;
     padding-right: 4%;
-    font-size: 25px;
+    text-align: center;
+}
+
+.button-span button:hover {
+    background: #b759ff;
 }
 
 #particles-js{

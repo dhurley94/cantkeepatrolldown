@@ -1,21 +1,44 @@
 // CORE APP.JS
 
 
-var centeredSearch = $(".center-form");
+var centeredSearch = $("#troll-search");
 var mainCont = $(".main-cont");
-var searchButton = $("#troll-search > button");
+var searchButton = $(".button-span > button");
 var buttonText = $(".troll-butt-text");
+    //centeredSearch.show();
 
 centeredSearch.hide();
 
 $(document).ready(function () {
 
     //Initial centering
-    getVertMargin(centeredSearch, mainCont);
+    //$("#troll-search > button").css("padding-left", "4%");
+    //$("#troll-search > button").css("padding-right", "4%");
+    
+    getVertMargin(centeredSearch, window);
     getHorzMargin(buttonText, searchButton);
     centeredSearch.show();
+    
+    if($(window).width() < 700){
+       $(".button-span").css("width", "20%");
+    }
 
 });
+
+$(window).resize(function(){
+    console.log("resizing");
+    $(".main-cont").css("height", "100vh");
+    $(".main-cont").css("width", "100vw");
+    getVertMargin(centeredSearch, window);
+    
+    if($(window).width() < 700){
+       $(".button-span").css("width", "20%");
+    }
+    else{
+       $(".button-span").css("width", "10%");
+       }
+    
+})
 
 
 //align an element vertically
