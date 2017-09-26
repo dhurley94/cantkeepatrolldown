@@ -8,13 +8,13 @@ var buttonText = $(".troll-butt-text");
 
 centeredSearch.hide();
 
-$(document).ready(function(){
-    
+$(document).ready(function () {
+
     //Initial centering
     getVertMargin(centeredSearch, mainCont);
     getHorzMargin(buttonText, searchButton);
     centeredSearch.show();
-    
+
 });
 
 
@@ -28,7 +28,7 @@ function getVertMargin(smallElem, parentElem) {
 
     $(smallElem).css("margin-top", marginToSet);
     $(smallElem).css("margin-bottom", marginToSet);
-    
+
 }
 
 //align an element horizontally
@@ -44,6 +44,6 @@ function getHorzMargin(smallElem, parentElem) {
 }
 
 /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-particlesJS.load('particles-js', 'assets/json/particles.json', function() {
-  console.log('callback - particles.js config loaded');
+particlesJS.load('particles-js', 'assets/json/particles.json', function () {
+    console.log('callback - particles.js config loaded');
 });
