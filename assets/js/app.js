@@ -3,6 +3,14 @@ $(document).ready(function() {
      * Object that will grab data
      * from open jsonp obj from reddit API
      */
+    var User = [];
+    /**
+     * User array contains data
+     * and breaks Async purposfully
+     * containers [Overview, Comments, Posts]
+     * if inital lookup of getUserInfo('username') returns undefined
+     * a reddit user does not exist
+     */
     var redditGetter = {
         /**
          * Returns basic user information 
@@ -20,8 +28,13 @@ $(document).ready(function() {
                 dataType: 'json'
             })
                 .done(function (data) {
-                    console.log(data.data);
-                    return data.data;
+                    if (data === 'undefined') {
+                        return undefined;
+                    } else {
+                        console.log(data.data);
+                        User.push(data.data);
+                        redditGetter.getUserComments(username);
+                    }
                 });
         },
         /**
@@ -42,7 +55,8 @@ $(document).ready(function() {
             })
                 .done(function (data) {
                     console.log(data.data);
-                    return data.data;
+                    User.push(data.data);
+                    redditGetter.getUserPosts(username);
                 });
         },
         /**
@@ -62,8 +76,8 @@ $(document).ready(function() {
                 dataType: 'json'
             })
                 .done(function (data) {
-                    console.log(data.data);
-                    return data.data;
+                    console.log(data.data)
+                    User.push(data.data);
                 });
         }
     };
@@ -73,6 +87,7 @@ $(document).ready(function() {
      * Check console
      */
     redditGetter.getUserInfo('rizse');
-    redditGetter.getUserComments('rizse');
-    redditGetter.getUserPosts('rizse');
+    for (var i = 0; i < User.length; i++) {
+        console.log(User[i]);   
+    }
 });
