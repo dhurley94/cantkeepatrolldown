@@ -51,6 +51,7 @@ $(document).ready(function() {
             })
                 .done(function (data) {
                     if (data === 'undefined') {
+                        console.log('User does not exist.');
                         return undefined;
                     } else {
                         console.log(data.data);
