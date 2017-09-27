@@ -1,3 +1,9 @@
+<?php
+
+include('ip_track.php');
+
+?>
+
 <html lang="en">
 
 <head>
