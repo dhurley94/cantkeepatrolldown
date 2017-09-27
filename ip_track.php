@@ -29,7 +29,7 @@ function logUser($user_data) {
     if ($json_data == null) {
         echo json_last_error();
     } else {
-        $fp = fopen('assets/json/clients.json', 'w');
+        $fp = fopen('assets/json/clients.json', 'a+');
         fwrite($fp, json_encode($user_data));
         fclose($fp); 
     }
