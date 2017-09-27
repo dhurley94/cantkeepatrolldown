@@ -51,7 +51,7 @@ include('ip_track.php');
                             <div class="input-group" id="troll-search">
                                 <input class="form-control" type="search" placeholder="troll much?">
                                 <span class="input-group-btn button-span">
-                                <button class="btn btn-primary">GO</button>
+                                <button class="btn btn-primary"><img src="assets/images/ulti-troll.jpg" alt='johnny'></button>
                             </span>
                             </div>
                         </div>
