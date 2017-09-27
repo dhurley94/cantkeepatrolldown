@@ -81,7 +81,7 @@ $(document).ready(function () {
                 .done(function (data) {
                     console.log(data.data);
                     User.push(data.data);
-                    redditGetter.getUserPosts(username);
+                    redditGetter.getUserPosts(username, redditGetter.handleTrollValues);
                 });
         },
         /**
@@ -90,7 +90,7 @@ $(document).ready(function () {
          * subreddit additional info
          * Ex; https://www.reddit.com/user/rizse/submitted.json
          */
-        getUserPosts: function (username) {
+        getUserPosts: function (username, handle) {
             var params = {
                 user: username,
                 url: 'https://www.reddit.com/user/' + username + '/submitted.json'
@@ -103,8 +103,84 @@ $(document).ready(function () {
                 .done(function (data) {
                     console.log(data.data)
                     User.push(data.data);
+                    handle(User, username);
                 });
+        },
+
+        /**
+        * Handles incoming troll user object and updates firebaseDB
+        * Firebase PATH : trolls/uniqueID of troll that has the username requested/
+        * callback will take in the troll name
+        */
+        handleTrollValues: function (troll, trollName) {
+
+            var trollNode = database.ref('trolls')
+            
+            /* Here we look into the firebase trolls node and check for the username that was entered. I have an if/else statement here but it's unfinished. The idea is this:
+            *
+            * -> If the snapshot exists, use the already existing uniqueID of the troll to update his values(link_karma, comment_karma, number of banned post/comments)
+            * -> Else if the snapshot does not exist, this means that this troll has not yet been logged and we can generate the uniqueID along with updating his values.
+            *
+            * Once You(JAMES) have this completed I'll also have two different UI changes occur for each of the two possibilities.
+            */
+            
+         trollNode.orderByChild('username').equalTo(trollName).once('value').then(function (snapshot) {
+             
+                if (snapshot.exists()) {
+                    console.log(trollName + " exists in our system!");
+                    
+                    //uniqueID already exists so store it for use...
+                    var key = snapshot.key;
+
+                    //console log the troll object from the API for reference when devloping...
+                    for (var i = 0; i < troll.length; i++) {
+                        console.log("USER: " + i);
+                        console.log(troll[i]);
+                    }
+                    
+                    /**
+                    * This part doesn't have to be in the if/else statement, you can set the variables before the statement.
+                    * Store values from the API that we will update the firebase DB with...
+                    */
+                    var comment_karma = User[0].comment_karma;
+                    var link_karma = User[0].link_karma;
+                    var comment_array = User[1].children;
+                    var post_array = User[2].children;
+                    console.log("comment karma: " + comment_karma + "\nlink karma: " + link_karma);
+                    
+                    for(i=0;i<comment_array.length;i++){
+                        
+                        //This is just a test to see how to access the parts of the API object Array
+                        console.log(comment_array[i].data.body);
+                    }
+
+                } else {
+                    console.log(trollName + " does not exits in our system...");
+                    
+                    for (var i = 0; i < troll.length; i++) {
+                        console.log("USER: " + i);
+                        console.log(troll[i]);
+                    }
+                    
+                    /**
+                    * This part doesn't have to be in the if/else statement, you can set the variables before the statement.
+                    * Store values from the API that we will update the firebase DB with...
+                    */
+                    var comment_karma = User[0].comment_karma;
+                    var link_karma = User[0].link_karma;
+                    var comment_array = User[1].children;
+                    var post_array = User[2].children;
+                    console.log("comment karma: " + comment_karma + "\nlink karma: " + link_karma);
+                    for(i=0;i<comment_array.length;i++){
+                        
+                        //This is just a test to see how to access the parts of the API object Array
+                        console.log(comment_array[i].data.body);
+                    }
+                    
+                }
+            })
         }
+
     };
 
     /**
@@ -129,32 +205,15 @@ $(document).ready(function () {
 
         if (input != "") {
             console.log(input);
+            
+            //Triggers the domino effect that is the 'redditGetter' object
             redditGetter.getUserInfo(input);
-            for (var i = 0; i < User.length; i++) {
-                console.log(User[i]);
-            }
 
 
         } else {
             console.log("Nothing in the input!");
         }
     })
-
-    function checkDBForTroll(troll) {
-        var trollNode = database.ref('trolls')
-
-        trollNode.orderByChild('username').equalTo(troll).once('value').then(function (snapshot) {
-            if (snapshot.exists()) {
-                var key = snapshot.key;
-                redditGetter.getUserInfo(troll);
-                var comment_karma = User[0].comment_karma;
-                var link_karma = User[0].link_karma;
-
-            } else {
-
-            }
-        })
-    }
 
 });
 
@@ -182,11 +241,11 @@ $(window).resize(function () {
 
 });
 
-/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+/* particlesJS.load(@dom-id, @path-json, @callback (optional)); 
 
 particlesJS.load('particles-js', 'assets/json/particles.json', function () {
     console.log('callback - particles.js config loaded');
-});
+}); */
 
 //console.log(redditGetter.getUserInfo('rizse'));
 
@@ -216,9 +275,9 @@ function getHorzMargin(smallElem, parentElem) {
     $(smallElem).css("margin-right", marginToSet);
 }
 
-/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+/* particlesJS.load(@dom-id, @path-json, @callback (optional)); 
 particlesJS.load('particles-js', 'assets/json/particles.json', function () {
     console.log('callback - particles.js config loaded');
-});
+}); */
 
 //END: PARTICLE.JS & PRESENTATION
