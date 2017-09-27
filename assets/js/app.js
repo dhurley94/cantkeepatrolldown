@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 $(document).ready(function() {
     /**
      * Object that will grab data
@@ -92,7 +91,6 @@ $(document).ready(function() {
         console.log(User[i]);   
     }
 });
-=======
 // CORE APP.JS
 
 
@@ -142,4 +140,3 @@ function getHorzMargin(smallElem, parentElem) {
 particlesJS.load('particles-js', 'assets/json/particles.json', function() {
   console.log('callback - particles.js config loaded');
 });
->>>>>>> master
