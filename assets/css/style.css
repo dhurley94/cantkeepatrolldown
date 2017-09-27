@@ -4,6 +4,10 @@ html,body{
 	background:#111;
 }
 
+button{
+    /*padding: 0px;*/
+}
+
 .form-control{
     border-style: none;
     border-color:none;
@@ -11,8 +15,8 @@ html,body{
 }
 
 .center-form{
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .main-cont {
@@ -22,27 +26,35 @@ html,body{
 }
 
 #troll-search {
-    border-style: solid;
+    
+    border-style:ridge;
     border-width: 2px;
-    border-color: #547cb7;
+    border-color: #b759ff;
     border-radius: 6px;
+    box-shadow: 0px 0px 40px black; 
     height:70px;
+    
 }
 
 #troll-search input {
     font-size: 25px;
 }
-#troll-search button {
-    border: none;
+
+.button-span {
     width: 10%;
+}
+.button-span button {
+    color: black;
+    background: #c997ef;
+    border: none;
+    font-size: 25px;
+    padding-left: 4%;
+    padding-right: 4%;
     text-align: center;
 }
 
-.troll-butt-text {
-    text-align: center;
-    font-size: 25px;
-    margin: 0;
-
+.button-span button:hover {
+    background: #b759ff;
 }
 
 #particles-js{

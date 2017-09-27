@@ -4,11 +4,9 @@
 
  1.   Steam, Reddit, Imgur, Gravatar
  2.   Uses IP to get general location of `trolls`, this location is tracked as more aliases are added with a similar alias
- 3.   https://www.ipvigilante.com/
+ 3.   https://www.reddit.com/dev/api/
  4.   https://apidocs.imgur.com/
- 5.   https://developer.valvesoftware.com/wiki/Steam_Web_API
- 
- 
+ 5.   https://github.com/VincentGarreau/particles.js/
  
 -----------------
 **CSS Framework** - http://getbootstrap.com/  
