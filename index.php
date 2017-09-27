@@ -19,7 +19,6 @@ include('ip_track.php');
 </head>
 
 <body>
-    <p>Check the console for Obj output</p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Full Screen Container START -->
