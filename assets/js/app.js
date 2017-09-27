@@ -1,4 +1,14 @@
 $(document).ready(function() {
+    
+    getVertMargin(centeredSearch, window);
+    getHorzMargin(buttonText, searchButton);
+    centeredSearch.show();
+    
+    if($(window).width() < 700){
+       $(".button-span").css("width", "20%");
+    }
+
+    
     //FireBase
     // Initialize Firebase
     var config = {
@@ -112,18 +122,6 @@ var buttonText = $(".troll-butt-text");
     //centeredSearch.show();
 
 centeredSearch.hide();
-
-$(document).ready(function () {
-    
-    getVertMargin(centeredSearch, window);
-    getHorzMargin(buttonText, searchButton);
-    centeredSearch.show();
-    
-    if($(window).width() < 700){
-       $(".button-span").css("width", "20%");
-    }
-
-});
 
 $(window).resize(function(){
     console.log("resizing");
