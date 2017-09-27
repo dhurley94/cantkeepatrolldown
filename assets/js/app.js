@@ -11,10 +11,17 @@ $(document).ready(function() {
     };
     firebase.initializeApp(config);
 
-    // API
     /**
      * Object that will grab data
      * from open jsonp obj from reddit API
+     */
+    var User = [];
+    /**
+     * User array contains data
+     * and breaks Async purposfully
+     * containers [Overview, Comments, Posts]
+     * if inital lookup of getUserInfo('username') returns undefined
+     * a reddit user does not exist
      */
     var redditGetter = {
         /**
@@ -22,19 +29,24 @@ $(document).ready(function() {
          * including total link and comment karma
          * Ex; https://www.reddit.com/user/rizse/about.json
          */
-        getUserInfo: function(username) {
+        getUserInfo: function (username) {
             var params = {
                 user: username,
                 url: 'https://www.reddit.com/user/' + username + '/about.json'
             };
             $.ajax({
-                    method: 'GET',
-                    url: params.url,
-                    dataType: 'json'
-                })
-                .done(function(data) {
-                    console.log(data);
-                    return data;
+                method: 'GET',
+                url: params.url,
+                dataType: 'json'
+            })
+                .done(function (data) {
+                    if (data === 'undefined') {
+                        return undefined;
+                    } else {
+                        console.log(data.data);
+                        User.push(data.data);
+                        redditGetter.getUserComments(username);
+                    }
                 });
         },
         /**
@@ -43,19 +55,20 @@ $(document).ready(function() {
          * subreddit and comment
          * Ex; https://www.reddit.com/user/rizse/comments.json
          */
-        getUserComments: function(username) {
+        getUserComments: function (username) {
             var params = {
                 user: username,
                 url: 'https://www.reddit.com/user/' + username + '/comments.json'
             };
             $.ajax({
-                    method: 'GET',
-                    url: params.url,
-                    dataType: 'json'
-                })
-                .done(function(data) {
-                    console.log(data);
-                    return data;
+                method: 'GET',
+                url: params.url,
+                dataType: 'json'
+            })
+                .done(function (data) {
+                    console.log(data.data);
+                    User.push(data.data);
+                    redditGetter.getUserPosts(username);
                 });
         },
         /**
@@ -64,23 +77,33 @@ $(document).ready(function() {
          * subreddit additional info
          * Ex; https://www.reddit.com/user/rizse/submitted.json
          */
-        getUserPosts: function(username) {
+        getUserPosts: function (username) {
             var params = {
                 user: username,
                 url: 'https://www.reddit.com/user/' + username + '/submitted.json'
             };
             $.ajax({
-                    method: 'GET',
-                    url: params.url,
-                    dataType: 'json'
-                })
-                .done(function(data) {
-                    console.log(data);
-                    return data;
+                method: 'GET',
+                url: params.url,
+                dataType: 'json'
+            })
+                .done(function (data) {
+                    console.log(data.data)
+                    User.push(data.data);
                 });
         }
     };
-    //END API
+
+    /**
+     * Example use cases
+     * Check console
+     */
+    redditGetter.getUserInfo('rizse');
+    for (var i = 0; i < User.length; i++) {
+        console.log(User[i]);   
+    }
+});
+// CORE APP.JS
 
 var centeredSearch = $("#troll-search");
 var mainCont = $(".main-cont");
@@ -147,18 +170,13 @@ function getHorzMargin(smallElem, parentElem) {
     $(smallElem).css("margin-right", marginToSet);
 }
 
-/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-particlesJS.load('particles-js', 'assets/json/particles.json', function () {
-    console.log('callback - particles.js config loaded');
-});
+    /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
 
-
+    particlesJS.load('particles-js', 'assets/json/particles.json', function () {
+        console.log('callback - particles.js config loaded');
+    });
 
     console.log(redditGetter.getUserInfo('rizse'));
-
-
-
-
 
     //PARTICLE.JS & PRESENTATION
     //align an element vertically
@@ -192,4 +210,3 @@ particlesJS.load('particles-js', 'assets/json/particles.json', function () {
     });
 
     //END: PARTICLE.JS & PRESENTATION
-});
