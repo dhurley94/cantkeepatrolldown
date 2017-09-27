@@ -39,6 +39,6 @@ $vistor_ipv4 = getUserIP();
 
 $getVerbose = getUserLoc($vistor_ipv4);
 
-logUser($getVerbose)
+logUser($getVerbose);
 
 ?>
