@@ -5,9 +5,9 @@ body {
     background: #111;
 }
 
-button {
+/* button {
     /*padding: 0px;*/
-}
+
 
 .form-control {
     border-style: none;
@@ -78,7 +78,7 @@ button {
 }
 
 .custom-toggler .navbar-toggler-icon {
-    background-image: url("assets/images/hamburger-xxl.png");
+    background-image: url("../images/hamburger-xxl.png");
 }
 
 .navbar-toggler:hover {
