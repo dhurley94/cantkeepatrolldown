@@ -10,10 +10,6 @@ var buttonText = $(".troll-butt-text");
 centeredSearch.hide();
 
 $(document).ready(function () {
-
-    //Initial centering
-    //$("#troll-search > button").css("padding-left", "4%");
-    //$("#troll-search > button").css("padding-right", "4%");
     
     getVertMargin(centeredSearch, window);
     getHorzMargin(buttonText, searchButton);
