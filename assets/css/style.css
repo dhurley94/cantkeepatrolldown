@@ -1,20 +1,21 @@
-html,body{ 
-	width:100%;
-	height:100%;
-	background:#111;
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background: #111;
 }
 
-button{
+button {
     /*padding: 0px;*/
 }
 
-.form-control{
+.form-control {
     border-style: none;
-    border-color:none;
-    border-color:none;
+    border-color: none;
+    border-color: none;
 }
 
-.center-form{
+.center-form {
     padding-left: 10%;
     padding-right: 10%;
 }
@@ -26,14 +27,12 @@ button{
 }
 
 #troll-search {
-    
-    border-style:ridge;
+    border-style: solid;
     border-width: 2px;
     border-color: #b759ff;
     border-radius: 6px;
-    box-shadow: 0px 0px 40px black; 
-    height:70px;
-    
+    box-shadow: 0px 0px 40px black;
+    height: 70px;
 }
 
 #troll-search input {
@@ -43,9 +42,10 @@ button{
 .button-span {
     width: 10%;
 }
+
 .button-span button {
-    color: black;
-    background: #c997ef;
+    color: #5b5b5b;
+    background: #f7f7f7;
     border: none;
     font-size: 25px;
     padding-left: 4%;
@@ -57,18 +57,72 @@ button{
     background: #b759ff;
 }
 
-#particles-js{
-  width: 100%;
-  height: 100%;
-  background-color: #060e1c;
-  background-image: url('');
-  background-size: cover;
-  position: fixed;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
+.navbar-toggler {
+    z-index: 902;
+    margin-top: 18px;
 }
 
-canvas{
-  display:block;
-  vertical-align:bottom;
+.mynavbar {
+    padding: 0;
+    position: fixed;
+    z-index: 901;
+    top: 0;
+    width: 100%;
+}
+
+#navbarSupportedContent {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    background-color: rgba(142, 40, 168, 0.5);
+    border-bottom-color: white;
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("http://www.iconsdb.com/icons/preview/white/hamburger-xxl.png");
+}
+
+.navbar-toggler:hover {
+    
+    border-bottom-style:solid;
+    border-bottom-width:2px;
+    border-bottom-color:mediumpurple;
+}
+
+
+.nav-link {
+    color: white;
+    text-align: center;
+}
+
+.nav-link:hover {
+    color: grey;
+}
+
+.nav-item {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#particles-js {
+    width: 100%;
+    height: 100%;
+    background-color: #060e1c;
+    background-image: url('../images/troll.reviews.png');
+    background-size: contain;
+    position: fixed;
+    z-index: 899;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+#search-bar-div {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 900;
+}
+
+canvas {
+    display: block;
+    vertical-align: bottom;
 }
