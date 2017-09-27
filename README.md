@@ -25,3 +25,7 @@
  * Realtime troll feed 
  * Cross-mapping of troll aliases 
  * Probabability of troll duplication
+
+## Live Site
+  cronjob is ran periodically and recreates the public_html with latest repodata
+  * Ex; */5 * * * * /home/troll/git.sh > /dev/null 2>&1
