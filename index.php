@@ -29,7 +29,7 @@ include('ip_track.php');
                     <div class="form-group">
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0 text-center" id="troll-search">
                             <input class="form-control" type="search" placeholder="troll much?">
-                            <button class=" btn btn-primary input-group-addon"><span class="troll-butt-text text-center">GO</span></button>
+                            <button class=" btn btn-primary input-group-addon"><span class="troll-butt-text text-center"><img src="assets/images/ulti-troll.jpg"</span></button>
                         </div>
                     </div>
                 </form>
