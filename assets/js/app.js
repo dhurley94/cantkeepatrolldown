@@ -1,30 +1,34 @@
-$(document).ready(function() {
-    
+//FireBase
+// Initialize Firebase
+
+var config = {
+    apiKey: "AIzaSyDEaKRk_ThdHR7NGFv6usbJEOkcn4eblTA",
+    authDomain: "durable-return-174902.firebaseapp.com",
+    databaseURL: "https://durable-return-174902.firebaseio.com",
+    projectId: "durable-return-174902",
+    storageBucket: "durable-return-174902.appspot.com",
+    messagingSenderId: "556904227370"
+};
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+$(document).ready(function () {
+
     getVertMargin(centeredSearch, window);
     getHorzMargin(buttonText, searchButton);
     centeredSearch.show();
-    
-    if($(window).width() < 700){
-       $(".button-span").css("width", "20%");
+
+    if ($(window).width() < 700) {
+        $(".button-span").css("width", "20%");
     }
-    
-    //FireBase
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyAtHFqNyx9r1K80KZ9O-BOPMJyygEfRVtg",
-        authDomain: "ckatd-3c3f4.firebaseapp.com",
-        databaseURL: "https://ckatd-3c3f4.firebaseio.com",
-        projectId: "ckatd-3c3f4",
-        storageBucket: "",
-        messagingSenderId: "342675726179"
-    };
-    firebase.initializeApp(config);
 
     /**
      * Object that will grab data
      * from open jsonp obj from reddit API
      */
     var User = [];
+
     /**
      * User array contains data
      * and breaks Async purposfully
@@ -44,10 +48,10 @@ $(document).ready(function() {
                 url: 'https://www.reddit.com/user/' + username + '/about.json'
             };
             $.ajax({
-                method: 'GET',
-                url: params.url,
-                dataType: 'json'
-            })
+                    method: 'GET',
+                    url: params.url,
+                    dataType: 'json'
+                })
                 .done(function (data) {
                     if (data === 'undefined') {
                         return undefined;
@@ -70,10 +74,10 @@ $(document).ready(function() {
                 url: 'https://www.reddit.com/user/' + username + '/comments.json'
             };
             $.ajax({
-                method: 'GET',
-                url: params.url,
-                dataType: 'json'
-            })
+                    method: 'GET',
+                    url: params.url,
+                    dataType: 'json'
+                })
                 .done(function (data) {
                     console.log(data.data);
                     User.push(data.data);
@@ -92,10 +96,10 @@ $(document).ready(function() {
                 url: 'https://www.reddit.com/user/' + username + '/submitted.json'
             };
             $.ajax({
-                method: 'GET',
-                url: params.url,
-                dataType: 'json'
-            })
+                    method: 'GET',
+                    url: params.url,
+                    dataType: 'json'
+                })
                 .done(function (data) {
                     console.log(data.data)
                     User.push(data.data);
@@ -107,11 +111,53 @@ $(document).ready(function() {
      * Example use cases
      * Check console
      */
-    redditGetter.getUserInfo('rizse');
+    /*redditGetter.getUserInfo('rizse');
     for (var i = 0; i < User.length; i++) {
-        console.log(User[i]);   
+        console.log(User[i]);
+    }*/
+
+
+
+    $("#getUser").on("click", function (e) {
+        e.preventDefault();
+
+        //save value in search box
+        var input = $("#trollName").val();
+
+        //clear search box
+        $("#trollName").val("");
+
+        if (input != "") {
+            console.log(input);
+            redditGetter.getUserInfo(input);
+            for (var i = 0; i < User.length; i++) {
+                console.log(User[i]);
+            }
+
+
+        } else {
+            console.log("Nothing in the input!");
+        }
+    })
+
+    function checkDBForTroll(troll) {
+        var trollNode = database.ref('trolls')
+
+        trollNode.orderByChild('username').equalTo(troll).once('value').then(function (snapshot) {
+            if (snapshot.exists()) {
+                var key = snapshot.key;
+                redditGetter.getUserInfo(troll);
+                var comment_karma = User[0].comment_karma;
+                var link_karma = User[0].link_karma;
+
+            } else {
+
+            }
+        })
     }
+
 });
+
 // CORE APP.JS
 
 var centeredSearch = $("#troll-search");
@@ -122,58 +168,57 @@ var buttonText = $(".troll-butt-text");
 
 centeredSearch.hide();
 
-$(window).resize(function(){
+$(window).resize(function () {
     console.log("resizing");
     $(".main-cont").css("height", "100vh");
     $(".main-cont").css("width", "100vw");
     getVertMargin(centeredSearch, window);
-    
-    if($(window).width() < 700){
-       $(".button-span").css("width", "20%");
+
+    if ($(window).width() < 700) {
+        $(".button-span").css("width", "20%");
+    } else {
+        $(".button-span").css("width", "10%");
     }
-    else{
-       $(".button-span").css("width", "10%");
-       }
-    
+
 });
 
-    /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
 
-    particlesJS.load('particles-js', 'assets/json/particles.json', function () {
-        console.log('callback - particles.js config loaded');
-    });
+particlesJS.load('particles-js', 'assets/json/particles.json', function () {
+    console.log('callback - particles.js config loaded');
+});
 
-    console.log(redditGetter.getUserInfo('rizse'));
+//console.log(redditGetter.getUserInfo('rizse'));
 
-    //PARTICLE.JS & PRESENTATION
-    //align an element vertically
-    function getVertMargin(smallElem, parentElem) {
-        var largeHeight = parseInt($(parentElem).height());
-        var smallHeight = parseInt($(smallElem).css("height"));
-        var marginAvail = largeHeight - smallHeight;
-        console.log(marginAvail);
-        var marginToSet = (marginAvail / 2);
+//PARTICLE.JS & PRESENTATION
+//align an element vertically
+function getVertMargin(smallElem, parentElem) {
+    var largeHeight = parseInt($(parentElem).height());
+    var smallHeight = parseInt($(smallElem).css("height"));
+    var marginAvail = largeHeight - smallHeight;
+    console.log(marginAvail);
+    var marginToSet = (marginAvail / 2);
 
-        $(smallElem).css("margin-top", marginToSet);
-        $(smallElem).css("margin-bottom", marginToSet);
+    $(smallElem).css("margin-top", marginToSet);
+    $(smallElem).css("margin-bottom", marginToSet);
 
-    }
+}
 
-    //align an element horizontally
-    function getHorzMargin(smallElem, parentElem) {
-        var largeWidth = parseInt($(parentElem).width());
-        var smallWidth = parseInt($(smallElem).css("width"));
-        var marginAvail = largeWidth - smallWidth;
-        console.log(marginAvail);
-        var marginToSet = (marginAvail / 2);
+//align an element horizontally
+function getHorzMargin(smallElem, parentElem) {
+    var largeWidth = parseInt($(parentElem).width());
+    var smallWidth = parseInt($(smallElem).css("width"));
+    var marginAvail = largeWidth - smallWidth;
+    console.log(marginAvail);
+    var marginToSet = (marginAvail / 2);
 
-        $(smallElem).css("margin-left", marginToSet);
-        $(smallElem).css("margin-right", marginToSet);
-    }
+    $(smallElem).css("margin-left", marginToSet);
+    $(smallElem).css("margin-right", marginToSet);
+}
 
-    /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-    particlesJS.load('particles-js', 'assets/json/particles.json', function() {
-        console.log('callback - particles.js config loaded');
-    });
+/* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+particlesJS.load('particles-js', 'assets/json/particles.json', function () {
+    console.log('callback - particles.js config loaded');
+});
 
-    //END: PARTICLE.JS & PRESENTATION
+//END: PARTICLE.JS & PRESENTATION
