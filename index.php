@@ -38,10 +38,10 @@ include('ip_track.php');
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Login</a>
+                                <a class="nav-link" data-toggle="modal" data-target="#login" href="#">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">SignUp</a>
+                                <a class="nav-link" data-toggle="modal" data-target="#register" href="#">Register</a>
                             </li>
                         </ul>
                     </div>
@@ -64,6 +64,44 @@ include('ip_track.php');
     </div>
     <!-- Full Screen Container END -->
 
+<div class="modal fade" id="login">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Login Form</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Sign in</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="register">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Registration Form</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Sign up!</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- BS4, Tether, jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
