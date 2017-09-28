@@ -24,12 +24,14 @@ include('ip_track.php');
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+
+
     <!-- Full Screen Container START -->
     <div class="container-fluid main-cont">
         <div class="row center-row">
             <div class="col" style="padding:0;">
-                
-                <div id="particles-js"></div>
+
+                <!--<div id="particles-js"></div>-->
 
                 <nav class="navbar navbar-toggleable-md mynavbar">
                     <button class="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,9 +54,9 @@ include('ip_track.php');
                     <form class="center-form">
                         <div class="form-group">
                             <div class="input-group" id="troll-search">
-                                <input class="form-control" type="search" placeholder="troll much?">
+                                <input id="trollName" class="form-control" type="search" placeholder="troll much?">
                                 <span class="input-group-btn button-span">
-                                <button id="troll-btn" class="btn btn-primary"></button>
+                                <button class="btn btn-primary" id="getUser">GO</button>
                             </span>
                             </div>
                         </div>
