@@ -78,7 +78,7 @@ include('ip_track.php');
     <!-- Particle.js -->
     <!-- <script src="assets/js/particles.js"></script> -->
     <script src="assets/js/firebase.js"></script>
-    <script src="assets/js/app.js"></script>
+    <!-- <script src="assets/js/app.js"></script> -->
 
 </body>
 
