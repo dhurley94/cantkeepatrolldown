@@ -13,7 +13,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-$(document).ready(function () {
+$(document).ready(function() {
 
     getVertMargin(centeredSearch, window);
     getHorzMargin(buttonText, searchButton);
@@ -42,7 +42,7 @@ $(document).ready(function () {
          * including total link and comment karma
          * Ex; https://www.reddit.com/user/rizse/about.json
          */
-        getUserInfo: function (username) {
+        getUserInfo: function(username) {
             var params = {
                 user: username,
                 url: 'https://www.reddit.com/user/' + username + '/about.json'
@@ -52,7 +52,7 @@ $(document).ready(function () {
                     url: params.url,
                     dataType: 'json'
                 })
-                .done(function (data) {
+                .done(function(data) {
                     if (data === 'undefined') {
                         return undefined;
                     } else {
@@ -68,7 +68,7 @@ $(document).ready(function () {
          * subreddit and comment
          * Ex; https://www.reddit.com/user/rizse/comments.json
          */
-        getUserComments: function (username) {
+        getUserComments: function(username) {
             var params = {
                 user: username,
                 url: 'https://www.reddit.com/user/' + username + '/comments.json'
@@ -78,7 +78,7 @@ $(document).ready(function () {
                     url: params.url,
                     dataType: 'json'
                 })
-                .done(function (data) {
+                .done(function(data) {
                     console.log(data.data);
                     User.push(data.data);
                     redditGetter.getUserPosts(username, redditGetter.handleTrollValues);
@@ -90,7 +90,7 @@ $(document).ready(function () {
          * subreddit additional info
          * Ex; https://www.reddit.com/user/rizse/submitted.json
          */
-        getUserPosts: function (username, handle) {
+        getUserPosts: function(username, handle) {
             var params = {
                 user: username,
                 url: 'https://www.reddit.com/user/' + username + '/submitted.json'
@@ -100,7 +100,7 @@ $(document).ready(function () {
                     url: params.url,
                     dataType: 'json'
                 })
-                .done(function (data) {
+                .done(function(data) {
                     console.log(data.data)
                     User.push(data.data);
                     handle(User, username);
@@ -108,107 +108,144 @@ $(document).ready(function () {
         },
 
         /**
-        * Handles incoming troll user object and updates firebaseDB
-        * Firebase PATH : trolls/uniqueID of troll that has the username requested/
-        * callback will take in the troll name
-        */
-        handleTrollValues: function (troll, trollName) {
+         * Handles incoming troll user object and updates firebaseDB
+         * Firebase PATH : trolls/uniqueID of troll that has the username requested/
+         * callback will take in the troll name
+         */
+        handleTrollValues: function(troll, trollName) {
 
-            var trollNode = database.ref('trolls')
-            
+            var trollNode = database.ref('trolls');
+
+
             /* Here we look into the firebase trolls node and check for the username that was entered. I have an if/else statement here but it's unfinished. The idea is this:
-            *
-            * -> If the snapshot exists, use the already existing uniqueID of the troll to update his values(link_karma, comment_karma, number of banned post/comments)
-            * -> Else if the snapshot does not exist, this means that this troll has not yet been logged and we can generate the uniqueID along with updating his values.
-            *
-            * Once You(JAMES) have this completed I'll also have two different UI changes occur for each of the two possibilities.
-            */
-            
-         trollNode.orderByChild('username').equalTo(trollName).once('value').then(function (snapshot) {
-             
-                if (snapshot.exists()) {
+             *
+             * -> If the snapshot exists, use the already existing uniqueID of the troll to update his values(link_karma, comment_karma, number of banned post/comments)
+             * -> Else if the snapshot does not exist, this means that this troll has not yet been logged and we can generate the uniqueID along with updating his values.
+             *
+             * Once You(JAMES) have this completed I'll also have two different UI changes occur for each of the two possibilities.
+             */
+
+            trollNode.orderByChild('username').equalTo(trollName).once('value').then(function(snapshot) {
+
+                if (snapshot.exists()) { //in FB
                     console.log(trollName + " exists in our system!");
-                    
+
                     //uniqueID already exists so store it for use...
 
                     var key;
                     var snap = snapshot;
-                    snap.forEach(function(thisTroll){
+                    console.log(snapshot);
+                    snap.forEach(function(thisTroll) {
                         console.log(thisTroll.key);
                         key = thisTroll.key;
+
                     })
-                    
+
                     var key = snapshot.key;
-                  
+
+
                     //console log the troll object from the API for reference when devloping...
                     for (var i = 0; i < troll.length; i++) {
                         console.log("USER: " + i);
                         console.log(troll[i]);
                     }
-                    
+
                     /**
-                    * This part doesn't have to be in the if/else statement, you can set the variables before the statement.
-                    * Store values from the API that we will update the firebase DB with...
-                    */
+                     * This part doesn't have to be in the if/else statement, you can set the variables before the statement.
+                     * Store values from the API that we will update the firebase DB with...
+                     */
                     var comment_karma = User[0].comment_karma;
                     var link_karma = User[0].link_karma;
                     var comment_array = User[1].children;
                     var post_array = User[2].children;
-                    
+
+                    //troll rating
+                    var trollRate;
+                    var isTroll = false; //troll bool
+
+                    if (comment_karma < 1) { //0 or below = troll
+                        isTroll = true;
+                        console.log(isTroll);
+                    } else {
+                        isTroll = false;
+                        console.log(isTroll);
+                    }
+
+
                     trollNode.child(key).update({
+                        is_troll: isTroll,
                         comment_karma: comment_karma,
-                        link_karma: link_karma
-                    })
-                    
+                        link_karma: 'ou812' //link_karma
+
+                    });
+
                     console.log("comment karma: " + comment_karma + "\nlink karma: " + link_karma);
-                    
-                    for(i=0;i<comment_array.length;i++){
-                        
+
+
+                    for (i = 0; i < comment_array.length; i++) {
+
                         //This is just a test to see how to access the parts of the API object Array
                         console.log(comment_array[i].data.body);
 
                     }
 
-                } else {
+                } else { //not in FB
                     console.log(trollName + " does not exits in our system...");
-                    
+                    console.log(key);
 
-                    var key = trollNode.push().key;
-                    
+
+                    // var key = trollNode.push().key;
+
                     for (var i = 0; i < troll.length; i++) {
                         console.log("USER: " + i);
                         console.log(troll[i]);
                     }
-                    
+
                     /**
-                    * This part doesn't have to be in the if/else statement, you can set the variables before the statement.
-                    * Store values from the API that we will update the firebase DB with...
-                    */
+                     * This part doesn't have to be in the if/else statement, you can set the variables before the statement.
+                     * Store values from the API that we will update the firebase DB with...
+                     */
                     var comment_karma = User[0].comment_karma;
                     var link_karma = User[0].link_karma;
                     var comment_array = User[1].children;
                     var post_array = User[2].children;
 
-                    
-                    trollNode.child(key).update({
+                    //troll rating
+                    var trollRate;
+                    var isTroll = false; //troll bool
+
+                    if (comment_karma < 0) { //0 or below = troll
+                        isTroll = true;
+                    } else {
+                        isTroll = false;
+                    }
+                    console.log('is troll:' + isTroll);
+
+                    trollNode.child(key).set({ //.update
                         username: trollName,
                         comment_karma: comment_karma,
-                        link_karma: link_karma
-                    })
+                        link_karma: link_karma,
+                        is_troll: isTroll
+
+                    });
+
+
 
                     console.log("comment karma: " + comment_karma + "\nlink karma: " + link_karma);
-                    for(i=0;i<comment_array.length;i++){
-                        
+                    for (i = 0; i < comment_array.length; i++) {
+
                         //This is just a test to see how to access the parts of the API object Array
 
                         console.log(comment_array[i].data.body);
                     }
-                    
+
                 }
             })
         }
 
     };
+
+
 
     /**
      * Example use cases
@@ -221,7 +258,7 @@ $(document).ready(function () {
 
 
 
-    $("#getUser").on("click", function (e) {
+    $("#getUser").on("click", function(e) {
         e.preventDefault();
 
         //save value in search box
@@ -232,7 +269,7 @@ $(document).ready(function () {
 
         if (input != "") {
             console.log(input);
-            
+
             //Triggers the domino effect that is the 'redditGetter' object
             redditGetter.getUserInfo(input);
 
@@ -254,7 +291,7 @@ var buttonText = $(".troll-butt-text");
 
 centeredSearch.hide();
 
-$(window).resize(function () {
+$(window).resize(function() {
     console.log("resizing");
     $(".main-cont").css("height", "100vh");
     $(".main-cont").css("width", "100vw");
