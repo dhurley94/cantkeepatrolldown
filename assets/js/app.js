@@ -114,7 +114,7 @@ $(document).ready(function () {
         */
         handleTrollValues: function (troll, trollName) {
 
-            var trollNode = database.ref('trolls')
+            var trollNode = database.ref('trolls');
             
             /* Here we look into the firebase trolls node and check for the username that was entered. I have an if/else statement here but it's unfinished. The idea is this:
             *
@@ -130,8 +130,13 @@ $(document).ready(function () {
                     console.log(trollName + " exists in our system!");
                     
                     //uniqueID already exists so store it for use...
-                    var key = snapshot.key;
-
+                    var key;
+                    var snap = snapshot;
+                    snap.forEach(function(thisTroll){
+                        console.log(thisTroll.key);
+                        key = thisTroll.key;
+                    })
+                    
                     //console log the troll object from the API for reference when devloping...
                     for (var i = 0; i < troll.length; i++) {
                         console.log("USER: " + i);
@@ -146,16 +151,24 @@ $(document).ready(function () {
                     var link_karma = User[0].link_karma;
                     var comment_array = User[1].children;
                     var post_array = User[2].children;
+                    
+                    trollNode.child(key).update({
+                        comment_karma: comment_karma,
+                        link_karma: link_karma
+                    })
+                    
                     console.log("comment karma: " + comment_karma + "\nlink karma: " + link_karma);
                     
                     for(i=0;i<comment_array.length;i++){
                         
                         //This is just a test to see how to access the parts of the API object Array
-                        console.log(comment_array[i].data.body);
+                        //console.log(comment_array[i].data.body);
                     }
 
                 } else {
                     console.log(trollName + " does not exits in our system...");
+                    
+                    var key = trollNode.push().key;
                     
                     for (var i = 0; i < troll.length; i++) {
                         console.log("USER: " + i);
@@ -170,11 +183,18 @@ $(document).ready(function () {
                     var link_karma = User[0].link_karma;
                     var comment_array = User[1].children;
                     var post_array = User[2].children;
+                    
+                    trollNode.child(key).update({
+                        username: trollName,
+                        comment_karma: comment_karma,
+                        link_karma: link_karma
+                    })
+                    
                     console.log("comment karma: " + comment_karma + "\nlink karma: " + link_karma);
                     for(i=0;i<comment_array.length;i++){
                         
                         //This is just a test to see how to access the parts of the API object Array
-                        console.log(comment_array[i].data.body);
+                        //console.log(comment_array[i].data.body);
                     }
                     
                 }
