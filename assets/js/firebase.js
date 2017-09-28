@@ -141,9 +141,6 @@ $(document).ready(function() {
 
                     })
 
-                    var key = snapshot.key;
-
-
                     //console log the troll object from the API for reference when devloping...
                     for (var i = 0; i < troll.length; i++) {
                         console.log("USER: " + i);
