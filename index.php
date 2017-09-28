@@ -56,11 +56,7 @@ include('ip_track.php');
                             <div class="input-group" id="troll-search">
                                 <input id="trollName" class="form-control" type="search" placeholder="troll much?">
                                 <span class="input-group-btn button-span">
-<<<<<<< HEAD:index.html
                                 <button class="btn btn-primary" id="getUser">GO</button>
-=======
-                                <button id="troll-btn" class="btn btn-primary"></button>
->>>>>>> master:index.php
                             </span>
                             </div>
                         </div>
@@ -81,7 +77,8 @@ include('ip_track.php');
     <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
 
     <!-- Particle.js -->
-    <!--<script src="assets/js/particles.js"></script>-->
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/firebase.js"></script>
     <script src="assets/js/app.js"></script>
 
 </body>

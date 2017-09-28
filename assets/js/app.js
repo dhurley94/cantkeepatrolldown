@@ -7,7 +7,6 @@ $(document).ready(function() {
     if($(window).width() < 700){
        $(".button-span").css("width", "20%");
     }
-
     
     //FireBase
     // Initialize Firebase
@@ -51,7 +50,6 @@ $(document).ready(function() {
             })
                 .done(function (data) {
                     if (data === 'undefined') {
-                        console.log('User does not exist.');
                         return undefined;
                     } else {
                         console.log(data.data);
@@ -120,7 +118,7 @@ var centeredSearch = $("#troll-search");
 var mainCont = $(".main-cont");
 var searchButton = $(".button-span > button");
 var buttonText = $(".troll-butt-text");
-    //centeredSearch.show();
+//centeredSearch.show();
 
 centeredSearch.hide();
 
