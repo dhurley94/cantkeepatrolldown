@@ -7,7 +7,8 @@ $(document).ready(function() {
     if($(window).width() < 700){
        $(".button-span").css("width", "20%");
     }
-    
+
+    // Duplicate firebase
     // //FireBase
     // // Initialize Firebase
     // var config = {
@@ -143,7 +144,6 @@ $(window).resize(function(){
         console.log('callback - particles.js config loaded');
     });
 
-    console.log(redditGetter.getUserInfo('rizse'));
 
     //PARTICLE.JS & PRESENTATION
     //align an element vertically
@@ -172,8 +172,8 @@ $(window).resize(function(){
     }
 
     /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
-    particlesJS.load('particles-js', 'assets/json/particles.json', function() {
-        console.log('callback - particles.js config loaded');
-    });
+    // particlesJS.load('particles-js', 'assets/json/particles.json', function() {
+    //     console.log('callback - particles.js config loaded');
+    // });
 
     //END: PARTICLE.JS & PRESENTATION
