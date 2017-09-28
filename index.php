@@ -64,6 +64,7 @@ include('ip_track.php');
     </div>
     <!-- Full Screen Container END -->
 
+<!-- Begin Login modal -->
 <div class="modal fade" id="login">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -83,6 +84,8 @@ include('ip_track.php');
     </div>
   </div>
 </div>
+<!-- End login modal -->
+<!-- Start registration modal -->
 <div class="modal fade" id="register">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -102,6 +105,7 @@ include('ip_track.php');
     </div>
   </div>
 </div>
+<!-- End registration modal -->
 
     <!-- BS4, Tether, jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
