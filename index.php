@@ -1,3 +1,12 @@
+<?php
+/**
+* include IP tracker / logger
+*/
+
+include('ip_track.php');
+
+?>
+
 <html lang="en">
 
 <head>
@@ -47,7 +56,11 @@
                             <div class="input-group" id="troll-search">
                                 <input id="trollName" class="form-control" type="search" placeholder="troll much?">
                                 <span class="input-group-btn button-span">
+<<<<<<< HEAD:index.html
                                 <button class="btn btn-primary" id="getUser">GO</button>
+=======
+                                <button id="troll-btn" class="btn btn-primary"></button>
+>>>>>>> master:index.php
                             </span>
                             </div>
                         </div>
