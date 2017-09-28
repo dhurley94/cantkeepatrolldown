@@ -8,17 +8,17 @@ $(document).ready(function() {
        $(".button-span").css("width", "20%");
     }
     
-    //FireBase
-    // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyAtHFqNyx9r1K80KZ9O-BOPMJyygEfRVtg",
-        authDomain: "ckatd-3c3f4.firebaseapp.com",
-        databaseURL: "https://ckatd-3c3f4.firebaseio.com",
-        projectId: "ckatd-3c3f4",
-        storageBucket: "",
-        messagingSenderId: "342675726179"
-    };
-    firebase.initializeApp(config);
+    // //FireBase
+    // // Initialize Firebase
+    // var config = {
+    //     apiKey: "AIzaSyAtHFqNyx9r1K80KZ9O-BOPMJyygEfRVtg",
+    //     authDomain: "ckatd-3c3f4.firebaseapp.com",
+    //     databaseURL: "https://ckatd-3c3f4.firebaseio.com",
+    //     projectId: "ckatd-3c3f4",
+    //     storageBucket: "",
+    //     messagingSenderId: "342675726179"
+    // };
+    // firebase.initializeApp(config);
 
     /**
      * Object that will grab data
