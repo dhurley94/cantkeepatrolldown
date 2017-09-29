@@ -4,8 +4,10 @@
 */
 
 include('ip_track.php');
+//require_once('assets/header.php');
 
 ?>
+<!DOCTYPE html> 
 
 <html lang="en">
 
@@ -65,21 +67,30 @@ include('ip_track.php');
     <!-- Full Screen Container END -->
 
 <!-- Begin Login modal -->
-<div class="modal fade" id="login">
+<div class="modal fade troll" id="login">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">Login</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Login Form</p>
+        <form>
+            <div class="form-group row">
+                <label for="lemail" class="col-form-label">Email / Username</label>
+                <input type="email" name="lemail" id="lemail" required>
+            </div>
+            <div class="form-group row">
+                <label for="lpassword" class="col-form-label">Password</label>
+                <input type="password" name="lpassword" id="lpassword" required>
+            </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary">Sign in</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </form>
       </div>
     </div>
   </div>
@@ -90,23 +101,39 @@ include('ip_track.php');
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">Registration</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>Registration Form</p>
+        <form>
+            <div class="form-group row">
+                <label for="reg_email" class="col-form-label">Email / Username</label>
+                <input type="email" name="reg_email" id="reg_email" required>
+            </div>
+            <div class="form-group row">
+                <label for="reg_password" class="col-form-label">Password</label>
+                <input type="password" name="reg_password" id="reg_password" required>
+            </div>
+            <div class="form-group row">
+                <label for="ver_password" class="col-form-label">Verify Password</label>
+                <input type="password" name="ver_password" id="ver_password" required>
+            </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Sign up!</button>
+        <button class="btn btn-primary" onsubmit="return false;">Sign up</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
 <!-- End registration modal -->
 
+<!--
+require_once('assets/footer.php');
+-->
     <!-- BS4, Tether, jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- javascript was being declared at top of body causing conflicts -->
