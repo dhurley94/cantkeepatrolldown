@@ -9,8 +9,6 @@ include('ip_track.php');
 ?>
 <!DOCTYPE html> 
 
-
-
 <html lang="en">
 
 <head>
