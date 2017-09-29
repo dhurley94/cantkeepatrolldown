@@ -114,8 +114,7 @@ $(document).ready(function() {
          */
         handleTrollValues: function(troll, trollName) {
 
-            var trollNode = database.ref('trolls');
-
+            var trollNode = database.ref('trolls')
 
             /* Here we look into the firebase trolls node and check for the username that was entered. I have an if/else statement here but it's unfinished. The idea is this:
              *
@@ -134,11 +133,9 @@ $(document).ready(function() {
 
                     var key;
                     var snap = snapshot;
-                    console.log(snapshot);
                     snap.forEach(function(thisTroll) {
                         console.log(thisTroll.key);
                         key = thisTroll.key;
-
                     })
 
                     //console log the troll object from the API for reference when devloping...
@@ -156,28 +153,46 @@ $(document).ready(function() {
                     var comment_array = User[1].children;
                     var post_array = User[2].children;
 
+                    // 10 lowest comments
+                    //lop through and get lowest 10
+
+                    var c1;
+                    var c2;
+                    var c3;
+                    var c4;
+                    var c5;
+                    var c6;
+                    var c7;
+                    var c8;
+                    var c9;
+                    var c10;
+
+                    // mal 
+                    var mal;
+                    // neut
+                    var neutral;
+                    // funny
+                    var funny;
+                    // banned
+                    var banned;
+                    // tot posts
+                    var topPosts;
+                    // tot comments
+                    var totComments;
+
                     //troll rating
                     var trollRate;
                     var isTroll = false; //troll bool
 
-                    if (comment_karma < 1) { //0 or below = troll
-                        isTroll = true;
-                        console.log(isTroll);
-                    } else {
-                        isTroll = false;
-                        console.log(isTroll);
-                    }
+
 
 
                     trollNode.child(key).update({
-                        is_troll: isTroll,
                         comment_karma: comment_karma,
-                        link_karma: 'ou812' //link_karma
-
-                    });
+                        link_karma: link_karma
+                    })
 
                     console.log("comment karma: " + comment_karma + "\nlink karma: " + link_karma);
-
 
                     for (i = 0; i < comment_array.length; i++) {
 
@@ -188,10 +203,9 @@ $(document).ready(function() {
 
                 } else { //not in FB
                     console.log(trollName + " does not exits in our system...");
-                    console.log(key);
 
 
-                    // var key = trollNode.push().key;
+                    var key = trollNode.push().key;
 
                     for (var i = 0; i < troll.length; i++) {
                         console.log("USER: " + i);
@@ -207,26 +221,12 @@ $(document).ready(function() {
                     var comment_array = User[1].children;
                     var post_array = User[2].children;
 
-                    //troll rating
-                    var trollRate;
-                    var isTroll = false; //troll bool
 
-                    if (comment_karma < 0) { //0 or below = troll
-                        isTroll = true;
-                    } else {
-                        isTroll = false;
-                    }
-                    console.log('is troll:' + isTroll);
-
-                    trollNode.child(key).set({ //.update
+                    trollNode.child(key).update({
                         username: trollName,
                         comment_karma: comment_karma,
-                        link_karma: link_karma,
-                        is_troll: isTroll
-
-                    });
-
-
+                        link_karma: link_karma
+                    })
 
                     console.log("comment karma: " + comment_karma + "\nlink karma: " + link_karma);
                     for (i = 0; i < comment_array.length; i++) {
@@ -241,8 +241,6 @@ $(document).ready(function() {
         }
 
     };
-
-
 
     /**
      * Example use cases
@@ -303,7 +301,6 @@ $(window).resize(function() {
 });
 
 /* particlesJS.load(@dom-id, @path-json, @callback (optional)); 
-
 particlesJS.load('particles-js', 'assets/json/particles.json', function () {
     console.log('callback - particles.js config loaded');
 }); */
