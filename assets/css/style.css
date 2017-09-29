@@ -1,13 +1,11 @@
 html,
 body {
-    width: 100%;
-    height: 100%;
-    background: #111;
+    background: #060e1c;
 }
+
 
 /* button {
     /*padding: 0px;*/
-
 
 .form-control {
     border-style: none;
@@ -58,14 +56,14 @@ body {
 }
 
 .navbar-toggler {
-    z-index: 902;
+    z-index: 1000;
     margin-top: 18px;
 }
 
 .mynavbar {
     padding: 0;
     position: fixed;
-    z-index: 901;
+    z-index: 999;
     top: 0;
     width: 100%;
 }
@@ -82,12 +80,10 @@ body {
 }
 
 .navbar-toggler:hover {
-    
-    border-bottom-style:solid;
-    border-bottom-width:2px;
-    border-bottom-color:mediumpurple;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: mediumpurple;
 }
-
 
 .nav-link {
     color: white;
@@ -104,16 +100,18 @@ body {
 }
 
 #particles-js {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: #060e1c;
     background-image: url('../images/troll.reviews.png');
     background-size: contain;
     position: fixed;
-    z-index: 899;
+    top: 0;
+    z-index: 1;
     background-position: top;
     background-repeat: no-repeat;
 }
+
 
 /*#troll-btn {
     width: 15%;
@@ -125,14 +123,128 @@ body {
     background-repeat: no-repeat;
 }*/
 
-#search-bar-div {
+.screen-div {
     width: 100%;
     height: 100%;
     position: fixed;
     z-index: 900;
 }
 
+.banner-col {
+    border-radius: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: rgba(38, 38, 38, 0.6);
+    box-shadow: 0px 0px 40px darkviolet;
+    z-index: 900;
+}
+
+.troll-type-col {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    z-index: 900;
+}
+
+.troll-type-butt {
+    margin: 5px;
+    width: 60%;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 20px;
+    border: none;
+    z-index: 900;
+}
+
+.action-section {
+    width: 100vw;
+    height: 100vh;
+    z-index: 900;
+}
+
+.submit-section {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: rgba(94, 54, 178, 0.9);
+    z-index:900;
+}
+
+.centered-submit {
+   background: none;
+}
+
+.troll-butts {
+    -webkit-transition: 0.1s;
+    -moz-transition: 0.1s;
+    -o-transition: 0.1s;
+    transition: 0.1s;
+}
+
+#fun-butt {
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 255, 63, 0.7);
+    border: none;
+}
+
+#fun-butt:hover {
+    color: white;
+}
+
+#nuet-butt {
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(246, 255, 0, 0.6);
+    border: none;
+}
+
+#nuet-butt:hover {
+    color: white;
+}
+
+#mal-butt {
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 0, 0, 0.6);
+    border: none;
+}
+
+#mal-butt:hover {
+    color: white;
+}
+
+.title-header {
+    color: white;
+    font-size: 75px;
+}
+
+.sub-header {
+    color: #7CB20A;
+    font-size: 25px;
+}
+
+.comment-section {
+    margin-top: 40px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #9E67FF;
+    width: 97%;
+    z-index: 950;
+}
+
+.comment-label {
+    color: #FFF567;
+    font-size: 40px;
+    z-index: 999;
+}
+
+#troll-comment {
+    text-align: center;
+    font-size: 30px;
+    z-index: 999;
+}
+
 canvas {
     display: block;
-    vertical-align: bottom;
 }

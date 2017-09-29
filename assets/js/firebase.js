@@ -13,10 +13,17 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-$(document).ready(function() {
+// hide/show stuff here for testing...
+$("#search-bar-div").hide();
+
+$(document).ready(function () {
 
     getVertMargin(centeredSearch, window);
     getHorzMargin(buttonText, searchButton);
+    getHorzMargin($(".comment-section"), window);
+    getVertMargin($(".centered-submit"), window);
+    
+    getVertMargin($(".banner-col"), $(".action-section"));
     centeredSearch.show();
 
     if ($(window).width() < 700) {
@@ -292,8 +299,8 @@ $(document).ready(function() {
                 } else { //not in FB
                     console.clear();
                     console.log(trollName + " does not exits in our system...");
-                    console.log(User);
-
+                    
+                    
                     var key = trollNode.push().key;
 
                     // for (var i = 0; i < troll.length; i++) {
@@ -512,9 +519,11 @@ centeredSearch.hide();
 
 $(window).resize(function() {
     console.log("resizing");
-    $(".main-cont").css("height", "100vh");
+    //$(".main-cont").css("height", "100vh");
     $(".main-cont").css("width", "100vw");
     getVertMargin(centeredSearch, window);
+    //getVertMargin($(".action-section"), window);
+    //getHorzMargin($(".comment-section"), window);
 
     if ($(window).width() < 700) {
         $(".button-span").css("width", "20%");
@@ -524,10 +533,27 @@ $(window).resize(function() {
 
 });
 
-/* particlesJS.load(@dom-id, @path-json, @callback (optional)); 
+$("#fun-butt").mouseenter(function(){
+    
+})
+
+$("#nuet-butt").mouseenter(function(){
+    
+})
+
+$("#mal-butt").mouseenter(function(){
+    
+})
+
+$(".troll-butts").mouseleave(function(){
+    $(this).css("border", "none");
+})
+
+//particlesJS.load(@dom-id, @path-json, @callback (optional)); 
+
 particlesJS.load('particles-js', 'assets/json/particles.json', function () {
     console.log('callback - particles.js config loaded');
-}); */
+});
 
 //console.log(redditGetter.getUserInfo('rizse'));
 

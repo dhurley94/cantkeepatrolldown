@@ -18,12 +18,19 @@ function getUserIP() {
     return $ip;
 }
 
+/**
+* fopen's json output of ipaddr
+*/
 function getUserLoc($ip_addr) {
     return json_decode(file_get_contents("http://ipinfo.io/{$ip_addr}/json"));
 }
 
+/**
+* appends users data to json file
+*/
 function logUser($user_data) {
     if ($json_data == null) {
+        echo 'no data';
         echo json_last_error();
     } else {
         $fp = fopen('assets/json/clients.json', 'a+');
