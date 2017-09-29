@@ -21,9 +21,9 @@ $(document).ready(function () {
     getVertMargin(centeredSearch, window);
     getHorzMargin(buttonText, searchButton);
     getHorzMargin($(".comment-section"), window);
-    getVertMargin($(".centered-submit"), window);
+    //getVertMargin($(".centered-submit"), window);
     
-    getVertMargin($(".banner-col"), $(".action-section"));
+    getVertMargin($(".banner-col"), window);
     centeredSearch.show();
 
     if ($(window).width() < 700) {
@@ -521,33 +521,23 @@ $(window).resize(function() {
     console.log("resizing");
     //$(".main-cont").css("height", "100vh");
     $(".main-cont").css("width", "100vw");
+    $(".action-section").css("height", "100vh").css("width", "100vw");
+    
     getVertMargin(centeredSearch, window);
-    //getVertMargin($(".action-section"), window);
+    getVertMargin($(".banner-col"), window);
+    
+    
     //getHorzMargin($(".comment-section"), window);
 
     if ($(window).width() < 700) {
+        $(".header-label").css("font-size", "20px");
         $(".button-span").css("width", "20%");
     } else {
+        $(".header-label").css("font-size", "40px");
         $(".button-span").css("width", "10%");
     }
 
 });
-
-$("#fun-butt").mouseenter(function(){
-    
-})
-
-$("#nuet-butt").mouseenter(function(){
-    
-})
-
-$("#mal-butt").mouseenter(function(){
-    
-})
-
-$(".troll-butts").mouseleave(function(){
-    $(this).css("border", "none");
-})
 
 //particlesJS.load(@dom-id, @path-json, @callback (optional)); 
 
