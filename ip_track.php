@@ -30,6 +30,7 @@ function getUserLoc($ip_addr) {
 */
 function logUser($user_data) {
     if ($json_data == null) {
+        echo 'no data';
         echo json_last_error();
     } else {
         $fp = fopen('assets/json/clients.json', 'a+');
