@@ -16,7 +16,8 @@ include('ip_track.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Troll Review</title>
-
+    
+    
     <!-- Bootrap min CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
@@ -79,23 +80,40 @@ include('ip_track.php');
                     <div class="submit-section">
                         <div class="row">
                             <div class="col centered-submit">
+                                <div class="row label-row">
+                                    <div class="col troll-type-label text-center">
+                                        <h1 class="header-label">How would you describe the troll?</h1>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col troll-type-col text-center">
-                                        <div class="btn-group troll-butts" role="group" aria-label="Basic example">
-                                            <button type="button" class="btn troll-type-butt" id="fun-butt">Funny</button>
-                                            <button type="button" class="btn troll-type-butt" id="nuet-butt">Neutral</button>
-                                            <button type="button" class="btn troll-type-butt" id="mal-butt">Malicious</button>
-                                        </div>
+
+                                                <button type="button" class="btn troll-type-butt" id="fun-butt">Funny</button>
+
+                                                <button type="button" class="btn troll-type-butt" id="nuet-butt">Neutral</button>
+
+                                                <button type="button" class="btn troll-type-butt" id="mal-butt">Malicious</button>
+
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col text-center">
                                         <div class="comment-section">
-                                            <label for="troll-comment" class="comment-label">What did this troll do?</label>
-                                            <div class="input-group">
-                                                <textarea id="troll-comment" class="form-control" type="text" placeholder=""></textarea>
-                                            </div>
+                                            <form>
+                                                <div class="form-group">
+                                                    <label for="troll-comment" class="comment-label header-label">What did this troll do?</label>
+                                                    <textarea id="troll-comment" class="form-control" type="text" placeholder="Tell on the troll!"></textarea>
+                                                </div>
+                                            </form>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col submit-butt-col text-center">
+                                        <button class="btn btn-success bottom-buttons submit-butt">Submit!</button>
+                                    </div>
+                                    <div class="col jk-butt-col text-center">
+                                        <button class="btn btn-danger bottom-buttons jk-butt">JK</button>
                                     </div>
                                 </div>
                             </div>
