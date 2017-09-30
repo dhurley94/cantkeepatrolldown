@@ -314,9 +314,6 @@ $(document).ready(function () {
                     //add to FB
                     trollNode.child(key).update({
 
-                        mal: 0,
-                        neutral: 0,
-                        funny: 0,
                         comment_karma: comment_karma,
                         link_karma: link_karma,
                         is_troll: isTroll,
@@ -347,7 +344,7 @@ $(document).ready(function () {
                     var subHeader = "you've caught a troll.";
 
                     console.log("Snapshot is: ");
-                    console.log(snapshot.val().is_troll);
+                    console.log(snapshot.val());
 
                     //Set proper alert message.
                     $(".title-header").html(header);
@@ -644,30 +641,32 @@ $(document).ready(function () {
 
     $(".submit-butt").on("click", function () {
         console.log("submit!");
-        
+
 
         var newComment = trollNode.child(key).child("reviews").push().key;
-        
+
         trollNode.child(key).child("reviews").child(newComment).update({
             trollType: trollType,
             comment: trollComment,
             timeStamp: $.now()
         })
-        
+
         if (trollType == "funny") {
             numFun = numFun + 1;
-            
+
             trollNode.child(key).update({
                 funny: numFun
             })
-            
+
         } else if (trollType == "neutral") {
+            numNeut = numNeut + 1;
             
             trollNode.child(key).update({
                 neutral: numNeut
             })
 
         } else if (trollType == "mal") {
+            numMal = numMal + 1;
             
             trollNode.child(key).update({
                 mal: numMal
@@ -680,10 +679,28 @@ $(document).ready(function () {
     $(".jk-butt").on("click", function () {
         console.log("JK!");
 
+        reset();
+
+        $("#search-bar-div").show();
+        $("#troll-submit-div").hide();
 
     })
 
+    function reset() {
+        
+        $(".troll-type-butt").css("opacity", "1.0");
+        $("#troll-comment").val("");
+        $(".num-Reviews").remove();
+        trollType = "";
+        trollComment = "";
+        key = "";
+        numFun = 0;
+        numMal = 0;
+        numNeut = 0;
+    }
+
 });
+//END OF DOC.READY
 
 // CORE APP.JS
 
