@@ -12,8 +12,13 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
+var trollNode = database.ref('trolls');
 var trollType = "";
-var trollComment;
+var trollComment = "";
+var key;
+var numFun = 0;
+var numMal = 0;
+var numNeut = 0;
 
 // hide/show stuff here for testing...
 $("#search-bar-div").show();
@@ -24,8 +29,8 @@ $("#troll-submit-div").hide();
 
 
 $(document).ready(function () {
-    
-    
+
+
     $(".submit-butt").attr("disabled", true);
     getVertMargin(centeredSearch, window);
     getHorzMargin(buttonText, searchButton);
@@ -131,8 +136,6 @@ $(document).ready(function () {
          */
         handleTrollValues: function (troll, trollName) {
 
-            var trollNode = database.ref('trolls')
-
             /* Here we look into the firebase trolls node and check for the username that was entered. I have an if/else statement here but it's unfinished. The idea is this:
              *
              * -> If the snapshot exists, use the already existing uniqueID of the troll to update his values(link_karma, comment_karma, number of banned post/comments)
@@ -161,10 +164,6 @@ $(document).ready(function () {
                     console.log("Snapshot is: ");
                     console.log(snapshot.val());
 
-                    var key;
-                    var numFun = 0;
-                    var numMal = 0;
-                    var numNeut = 0;
 
                     var snap = snapshot;
                     snap.forEach(function (thisTroll) {
@@ -354,7 +353,7 @@ $(document).ready(function () {
                     $(".title-header").html(header);
                     $(".sub-header").html(subHeader);
 
-                    var key = trollNode.push().key;
+                    key = trollNode.push().key;
 
                     // for (var i = 0; i < troll.length; i++) {
                     //     console.log("USER: " + i);
@@ -598,7 +597,7 @@ $(document).ready(function () {
         } else {
             $(".submit-butt").removeAttr("disabled");
         }
-        
+
         if ($(this).attr("id") == "fun-butt") {
 
             console.log("funny!");
@@ -634,7 +633,7 @@ $(document).ready(function () {
     $('#troll-comment').on('input', function () {
 
         trollComment = $(this).val();
-        
+
         if (($(this).val() == "") || (trollType == "")) {
             $(".submit-butt").attr("disabled", true);
         } else {
@@ -642,6 +641,47 @@ $(document).ready(function () {
         }
 
     });
+
+    $(".submit-butt").on("click", function () {
+        console.log("submit!");
+        
+
+        var newComment = trollNode.child(key).child("reviews").push().key;
+        
+        trollNode.child(key).child("reviews").child(newComment).update({
+            trollType: trollType,
+            comment: trollComment,
+            timeStamp: $.now()
+        })
+        
+        if (trollType == "funny") {
+            numFun = numFun + 1;
+            
+            trollNode.child(key).update({
+                funny: numFun
+            })
+            
+        } else if (trollType == "neutral") {
+            
+            trollNode.child(key).update({
+                neutral: numNeut
+            })
+
+        } else if (trollType == "mal") {
+            
+            trollNode.child(key).update({
+                mal: numMal
+            })
+
+        }
+
+    })
+
+    $(".jk-butt").on("click", function () {
+        console.log("JK!");
+
+
+    })
 
 });
 
