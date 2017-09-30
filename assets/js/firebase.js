@@ -21,14 +21,14 @@ var numMal = 0;
 var numNeut = 0;
 
 // hide/show stuff here for testing...
-$("#search-bar-div").hide();
-//$("#search-bar-div").show();
+//$("#search-bar-div").hide();
+$("#search-bar-div").show();
 
 //$("#troll-submit-div").show();
 $("#troll-submit-div").hide();
 
-//$("#troll-profile-div").hide();
-$("#troll-profile-div").show();
+$(".troll-profile-div").hide();
+//$("#troll-profile-div").show();
 
 
 $(document).ready(function () {
@@ -644,7 +644,6 @@ $(document).ready(function () {
     $(".submit-butt").on("click", function () {
         console.log("submit!");
 
-
         var newComment = trollNode.child(key).child("reviews").push().key;
 
         trollNode.child(key).child("reviews").child(newComment).update({
@@ -662,19 +661,38 @@ $(document).ready(function () {
 
         } else if (trollType == "neutral") {
             numNeut = numNeut + 1;
-            
+
             trollNode.child(key).update({
                 neutral: numNeut
             })
 
         } else if (trollType == "mal") {
             numMal = numMal + 1;
-            
+
             trollNode.child(key).update({
                 mal: numMal
             })
 
         }
+        
+        trollNode.child(key).once("value").then( function (snapshot) {
+            var snap = snapshot.val();
+
+            $(".funny-number").html(snap.funny);
+            $(".neutral-number").html(snap.neutral);
+            $(".mal-number").html(snap.mal);
+            
+            reset();
+
+        })
+        
+        
+       //$("#troll-submit-div").show();
+            $("#troll-submit-div").hide();
+
+            $(".troll-profile-div").show();
+            //$("#troll-profile-div").show(); 
+        
 
     })
 
@@ -687,9 +705,18 @@ $(document).ready(function () {
         $("#troll-submit-div").hide();
 
     })
+    
+    $("#backToSearch").on("click", function(){
+        
+        $("#search-bar-div").show();
+        $(".troll-profile-div").hide();
+        
+    })
+    
+    
 
     function reset() {
-        
+
         $(".troll-type-butt").css("opacity", "1.0");
         $("#troll-comment").val("");
         $(".num-Reviews").remove();
