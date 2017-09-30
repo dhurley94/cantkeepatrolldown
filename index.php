@@ -102,7 +102,7 @@ include('ip_track.php');
                                             <form>
                                                 <div class="form-group">
                                                     <label for="troll-comment" class="comment-label header-label">What did this troll do?</label>
-                                                    <textarea id="troll-comment" class="form-control" type="text" placeholder=""></textarea>
+                                                    <textarea id="troll-comment" class="form-control" type="text" placeholder="Tell on the troll!"></textarea>
                                                 </div>
                                             </form>
                                         </div>

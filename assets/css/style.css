@@ -230,6 +230,10 @@ body {
     font-size: 25px;
 }
 
+.num-Reviews {
+    color: darkseagreen;
+}
+
 .header-label {
     color: white;
     font-size: 40px;

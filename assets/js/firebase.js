@@ -12,17 +12,26 @@ var config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
+var trollType = "";
+var trollComment;
 
 // hide/show stuff here for testing...
-$("#search-bar-div").hide();
+$("#search-bar-div").show();
+//$("#search-bar-div").hide();
+
+//$("#troll-submit-div").show();
+$("#troll-submit-div").hide();
+
 
 $(document).ready(function () {
-
+    
+    
+    $(".submit-butt").attr("disabled", true);
     getVertMargin(centeredSearch, window);
     getHorzMargin(buttonText, searchButton);
     getHorzMargin($(".comment-section"), window);
     //getVertMargin($(".centered-submit"), window);
-    
+
     getVertMargin($(".banner-col"), window);
     centeredSearch.show();
 
@@ -50,7 +59,7 @@ $(document).ready(function () {
          * including total link and comment karma
          * Ex; https://www.reddit.com/user/rizse/about.json
          */
-        getUserInfo: function(username) {
+        getUserInfo: function (username) {
             var params = {
                 user: username,
                 url: 'https://www.reddit.com/user/' + username + '/about.json'
@@ -60,7 +69,7 @@ $(document).ready(function () {
                     url: params.url,
                     dataType: 'json'
                 })
-                .done(function(data) {
+                .done(function (data) {
                     if (data === 'undefined') {
                         return undefined;
                     } else {
@@ -76,7 +85,7 @@ $(document).ready(function () {
          * subreddit and comment
          * Ex; https://www.reddit.com/user/rizse/comments.json
          */
-        getUserComments: function(username) {
+        getUserComments: function (username) {
             var params = {
                 user: username,
                 url: 'https://www.reddit.com/user/' + username + '/comments.json'
@@ -86,7 +95,7 @@ $(document).ready(function () {
                     url: params.url,
                     dataType: 'json'
                 })
-                .done(function(data) {
+                .done(function (data) {
                     console.log(data.data);
                     User.push(data.data); //index 1
                     redditGetter.getUserPosts(username, redditGetter.handleTrollValues);
@@ -98,7 +107,7 @@ $(document).ready(function () {
          * subreddit additional info
          * Ex; https://www.reddit.com/user/rizse/submitted.json
          */
-        getUserPosts: function(username, handle) {
+        getUserPosts: function (username, handle) {
             var params = {
                 user: username,
                 url: 'https://www.reddit.com/user/' + username + '/submitted.json'
@@ -108,7 +117,7 @@ $(document).ready(function () {
                     url: params.url,
                     dataType: 'json'
                 })
-                .done(function(data) {
+                .done(function (data) {
                     console.log(data.data)
                     User.push(data.data); //index 2
                     handle(User, username);
@@ -120,7 +129,7 @@ $(document).ready(function () {
          * Firebase PATH : trolls/uniqueID of troll that has the username requested/
          * callback will take in the troll name
          */
-        handleTrollValues: function(troll, trollName) {
+        handleTrollValues: function (troll, trollName) {
 
             var trollNode = database.ref('trolls')
 
@@ -132,7 +141,7 @@ $(document).ready(function () {
              * Once You(JAMES) have this completed I'll also have two different UI changes occur for each of the two possibilities.
              */
 
-            trollNode.orderByChild('username').equalTo(trollName).once('value').then(function(snapshot) {
+            trollNode.orderByChild('username').equalTo(trollName).once('value').then(function (snapshot) {
 
                 if (snapshot.exists()) { //in FB
 
@@ -141,24 +150,39 @@ $(document).ready(function () {
                     console.log(User);
                     //uniqueID already exists so store it for use...
 
+                    var header = "Oh Snap!";
+                    var subHeader = "Looks like you're not the only one...";
+
+
+                    //Set proper alert message.
+                    $(".title-header").html(header);
+                    $(".sub-header").html(subHeader);
+
+                    console.log("Snapshot is: ");
+                    console.log(snapshot.val());
+
                     var key;
+                    var numFun = 0;
+                    var numMal = 0;
+                    var numNeut = 0;
+
                     var snap = snapshot;
-                    snap.forEach(function(thisTroll) {
+                    snap.forEach(function (thisTroll) {
                         console.log(thisTroll.key);
                         key = thisTroll.key;
+                        numFun = thisTroll.val().funny;
+                        numMal = thisTroll.val().mal;
+                        numNeut = thisTroll.val().neutral;
                     })
 
-                    //console log the troll object from the API for reference when devloping...
-                    // for (var i = 0; i < troll.length; i++) {
-                    //     console.log("USER: " + i);
-                    //     console.log(troll[i]);
-                    // }
+                    var numPeople = (numFun + numMal + numNeut);
 
-                    /**
-                     * This part doesn't have to be in the if/else statement, you can set the variables before the statement.
-                     * Store values from the API that we will update the firebase DB with...
-                     */
+                    console.log("Number is: ");
+                    console.log(numPeople);
 
+                    var numReviewsElem = $("<p></p>").addClass("num-Reviews").html("(" + numPeople + ") people have wrote reviews");
+
+                    $(".banner-col").append(numReviewsElem);
 
 
                     //FB fields
@@ -193,52 +217,72 @@ $(document).ready(function () {
                         //gets the first 10 comments and stores them in FB
                         switch (i) {
                             case 0:
-                                trollNode.child(key).update({ c0: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c0: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 1:
-                                trollNode.child(key).update({ c1: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c1: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 2:
-                                trollNode.child(key).update({ c2: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c2: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 3:
-                                trollNode.child(key).update({ c3: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c3: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 4:
-                                trollNode.child(key).update({ c4: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c4: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 5:
-                                trollNode.child(key).update({ c5: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c5: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 6:
-                                trollNode.child(key).update({ c6: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c6: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 7:
-                                trollNode.child(key).update({ c7: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c7: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 8:
-                                trollNode.child(key).update({ c8: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c8: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 9:
-                                trollNode.child(key).update({ c9: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c9: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
                         }
@@ -299,8 +343,17 @@ $(document).ready(function () {
                 } else { //not in FB
                     console.clear();
                     console.log(trollName + " does not exits in our system...");
-                    
-                    
+
+                    var header = "Congrats!";
+                    var subHeader = "you've caught a troll.";
+
+                    console.log("Snapshot is: ");
+                    console.log(snapshot.val().is_troll);
+
+                    //Set proper alert message.
+                    $(".title-header").html(header);
+                    $(".sub-header").html(subHeader);
+
                     var key = trollNode.push().key;
 
                     // for (var i = 0; i < troll.length; i++) {
@@ -344,52 +397,72 @@ $(document).ready(function () {
                         //gets the first 10 comments and stores them in FB
                         switch (i) {
                             case 0:
-                                trollNode.child(key).update({ c0: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c0: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 1:
-                                trollNode.child(key).update({ c1: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c1: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 2:
-                                trollNode.child(key).update({ c2: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c2: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 3:
-                                trollNode.child(key).update({ c3: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c3: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 4:
-                                trollNode.child(key).update({ c4: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c4: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 5:
-                                trollNode.child(key).update({ c5: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c5: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 6:
-                                trollNode.child(key).update({ c6: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c6: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 7:
-                                trollNode.child(key).update({ c7: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c7: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 8:
-                                trollNode.child(key).update({ c8: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c8: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
 
                             case 9:
-                                trollNode.child(key).update({ c9: comment_array[i].data.body.trim() });
+                                trollNode.child(key).update({
+                                    c9: comment_array[i].data.body.trim()
+                                });
                                 commentScore += comment_array[i].data.score;
                                 break;
                         }
@@ -482,8 +555,9 @@ $(document).ready(function () {
 
 
 
-    $("#getUser").on("click", function(e) {
+    $("#getUser").on("click", function (e) {
         e.preventDefault();
+
 
         //save value in search box
         var input = $("#trollName").val();
@@ -497,13 +571,77 @@ $(document).ready(function () {
             //Triggers the domino effect that is the 'redditGetter' object
             //clear User array
             User = [];
+
+
             redditGetter.getUserInfo(input);
+
+            //$("#search-bar-div").show();
+            $("#search-bar-div").hide();
+
+            $("#troll-submit-div").show();
+
+            getHorzMargin($(".comment-section"), window);
+            //$("#troll-submit-div").hide();
 
 
         } else {
             console.log("Nothing in the input!");
         }
+
     })
+
+    $(".troll-type-butt").on("click", function (e) {
+        e.preventDefault();
+
+        if ((trollComment == "")) {
+            $(".submit-butt").attr("disabled", true);
+        } else {
+            $(".submit-butt").removeAttr("disabled");
+        }
+        
+        if ($(this).attr("id") == "fun-butt") {
+
+            console.log("funny!");
+            $(this).css("opacity", "1.0");
+            $("#nuet-butt").css("opacity", "0.4");
+            $("#mal-butt").css("opacity", "0.4");
+
+            trollType = "funny";
+
+
+        } else if ($(this).attr("id") == "nuet-butt") {
+
+            console.log("Neutral!");
+            $(this).css("opacity", "1.0");
+            $("#fun-butt").css("opacity", "0.4");
+            $("#mal-butt").css("opacity", "0.4");
+
+            trollType = "neutral";
+
+        } else if ($(this).attr("id") == "mal-butt") {
+
+            console.log("Bad!");
+            $(this).css("opacity", "1.0");
+            $("#fun-butt").css("opacity", "0.4");
+            $("#nuet-butt").css("opacity", "0.4");
+
+            trollType = "mal";
+
+        }
+
+    })
+
+    $('#troll-comment').on('input', function () {
+
+        trollComment = $(this).val();
+        
+        if (($(this).val() == "") || (trollType == "")) {
+            $(".submit-butt").attr("disabled", true);
+        } else {
+            $(".submit-butt").removeAttr("disabled");
+        }
+
+    });
 
 });
 
@@ -517,16 +655,16 @@ var buttonText = $(".troll-butt-text");
 
 centeredSearch.hide();
 
-$(window).resize(function() {
+$(window).resize(function () {
     console.log("resizing");
     //$(".main-cont").css("height", "100vh");
     $(".main-cont").css("width", "100vw");
     $(".action-section").css("height", "100vh").css("width", "100vw");
-    
+    getHorzMargin($(".comment-section"), window);
     getVertMargin(centeredSearch, window);
     getVertMargin($(".banner-col"), window);
-    
-    
+
+
     //getHorzMargin($(".comment-section"), window);
 
     if ($(window).width() < 700) {
