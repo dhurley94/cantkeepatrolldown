@@ -21,15 +21,17 @@ var numMal = 0;
 var numNeut = 0;
 
 // hide/show stuff here for testing...
-$("#search-bar-div").show();
-//$("#search-bar-div").hide();
+$("#search-bar-div").hide();
+//$("#search-bar-div").show();
 
 //$("#troll-submit-div").show();
 $("#troll-submit-div").hide();
 
+//$("#troll-profile-div").hide();
+$("#troll-profile-div").show();
+
 
 $(document).ready(function () {
-
 
     $(".submit-butt").attr("disabled", true);
     getVertMargin(centeredSearch, window);

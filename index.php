@@ -68,6 +68,7 @@ include('ip_track.php');
                 </div>
                 <!-- Search Bar Div END -->
 
+                <!-- Submit Review Div START -->
                 <div id="troll-submit-div">
                     <div class="action-section">
                         <div class="row">
@@ -120,7 +121,34 @@ include('ip_track.php');
                         </div>
                     </div>
                 </div>
-
+                <!-- Submit Review Div END -->
+                
+                
+                <!-- Troll Profile Div SART -->
+                <div class="troll-profile-div">
+                    <div class="row go-back-row">
+                        <div class="col go-back-col">
+                            <button class="btn btn-secondary" id="backToSearch" style="background:none;">
+                                BACK TO SEARCH
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row username-row">
+                        <div class="col username-col text-center">
+                            <div class="username-section">
+                                <h1 class="username-text title-header">Roman</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row is-troll-row">
+                        <div class="col is-troll-col text-center">
+                            <div class="is-troll-section">
+                                <h3 class="is-troll-label">Is Troll:<span class="is-troll-value"> FALSE</span></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Troll Profile Div END --> 
 
             </div>
         </div>
