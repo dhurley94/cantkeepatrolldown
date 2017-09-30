@@ -677,21 +677,24 @@ $(document).ready(function () {
         
         trollNode.child(key).once("value").then( function (snapshot) {
             var snap = snapshot.val();
+            
+            $(".username-text").html(snap.username);
 
             $(".funny-number").html(snap.funny);
             $(".neutral-number").html(snap.neutral);
             $(".mal-number").html(snap.mal);
             
+            
             reset();
-
-        })
-        
-        
-       //$("#troll-submit-div").show();
+            
+             //$("#troll-submit-div").show();
             $("#troll-submit-div").hide();
 
             $(".troll-profile-div").show();
             //$("#troll-profile-div").show(); 
+
+        })
+         
         
 
     })

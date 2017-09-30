@@ -136,7 +136,7 @@ include('ip_track.php');
                         <div class="row username-row">
                             <div class="col username-col text-center">
                                 <div class="username-section">
-                                    <h1 class="username-text title-header">Roman</h1>
+                                    <h1 class="username-text">Roman</h1>
                                 </div>
                             </div>
                         </div>
