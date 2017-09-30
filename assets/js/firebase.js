@@ -21,15 +21,17 @@ var numMal = 0;
 var numNeut = 0;
 
 // hide/show stuff here for testing...
-$("#search-bar-div").show();
 //$("#search-bar-div").hide();
+$("#search-bar-div").show();
 
 //$("#troll-submit-div").show();
 $("#troll-submit-div").hide();
 
+$(".troll-profile-div").hide();
+//$("#troll-profile-div").show();
+
 
 $(document).ready(function () {
-
 
     $(".submit-butt").attr("disabled", true);
     getVertMargin(centeredSearch, window);
@@ -314,9 +316,6 @@ $(document).ready(function () {
                     //add to FB
                     trollNode.child(key).update({
 
-                        mal: 0,
-                        neutral: 0,
-                        funny: 0,
                         comment_karma: comment_karma,
                         link_karma: link_karma,
                         is_troll: isTroll,
@@ -347,7 +346,7 @@ $(document).ready(function () {
                     var subHeader = "you've caught a troll.";
 
                     console.log("Snapshot is: ");
-                    console.log(snapshot.val().is_troll);
+                    console.log(snapshot.val());
 
                     //Set proper alert message.
                     $(".title-header").html(header);
@@ -644,46 +643,93 @@ $(document).ready(function () {
 
     $(".submit-butt").on("click", function () {
         console.log("submit!");
-        
 
         var newComment = trollNode.child(key).child("reviews").push().key;
-        
+
         trollNode.child(key).child("reviews").child(newComment).update({
             trollType: trollType,
             comment: trollComment,
             timeStamp: $.now()
         })
-        
+
         if (trollType == "funny") {
             numFun = numFun + 1;
-            
+
             trollNode.child(key).update({
                 funny: numFun
             })
-            
+
         } else if (trollType == "neutral") {
-            
+            numNeut = numNeut + 1;
+
             trollNode.child(key).update({
                 neutral: numNeut
             })
 
         } else if (trollType == "mal") {
-            
+            numMal = numMal + 1;
+
             trollNode.child(key).update({
                 mal: numMal
             })
 
         }
+        
+        trollNode.child(key).once("value").then( function (snapshot) {
+            var snap = snapshot.val();
+
+            $(".funny-number").html(snap.funny);
+            $(".neutral-number").html(snap.neutral);
+            $(".mal-number").html(snap.mal);
+            
+            reset();
+
+        })
+        
+        
+       //$("#troll-submit-div").show();
+            $("#troll-submit-div").hide();
+
+            $(".troll-profile-div").show();
+            //$("#troll-profile-div").show(); 
+        
 
     })
 
     $(".jk-butt").on("click", function () {
         console.log("JK!");
 
+        reset();
+
+        $("#search-bar-div").show();
+        $("#troll-submit-div").hide();
 
     })
+    
+    $("#backToSearch").on("click", function(){
+        
+        $("#search-bar-div").show();
+        $(".troll-profile-div").hide();
+        
+    })
+    
+    
+
+    function reset() {
+
+        $(".troll-type-butt").css("opacity", "1.0");
+        $("#troll-comment").val("");
+        $(".num-Reviews").remove();
+        trollType = "";
+        trollComment = "";
+        key = "";
+        numFun = 0;
+        numMal = 0;
+        numNeut = 0;
+    }
 
 });
+//END OF DOC.READY
 
 // CORE APP.JS
 
