@@ -14,6 +14,34 @@
     overflow: auto;
 }
 
+.right-header {
+    padding-top: 30px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.right-header-obj {
+    position: relative;
+}
+
+#right-header-left {
+    text-align: left;
+    margin-left: 0;
+    padding: 0;
+}
+
+#right-header-right {
+    background: none;
+    border: none;
+    height: 100%;
+    width: 100%;
+    background-image: url("../images/review_filter.png");
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .profile-action-butt {
     background-color: #EDEDED;
     border-style: solid;
@@ -54,8 +82,6 @@
     border-bottom-style: solid;
     border-bottom-width: 0.5px;
     border-bottom-color: rgba(53, 53, 53, 0.1);
-}
-    
 }
 
 #perc-nuetral {
