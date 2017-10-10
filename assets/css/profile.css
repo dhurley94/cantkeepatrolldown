@@ -1,0 +1,103 @@
+.troll-profile-div {
+    z-index: 899;
+    position: relative;
+}
+
+.left-screen {
+    background: rgba(200, 244, 244, 0.1);
+    height: 100vh;
+    overflow: auto;
+}
+
+.right-screen {
+    height: 100vh;
+    overflow: auto;
+}
+
+.profile-action-butt {
+    background-color: #EDEDED;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #DEDEDE;
+    border-radius: 8px;
+    
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#search-action {
+    background-image: url("../images/searchGlass.png");
+}
+
+#connect-action {
+    background-image: url("../images/thumbprint.png");
+}
+
+.username-row {
+    margin-top: 20px;
+    z-index: 900;
+    position: relative;
+}
+
+.type-percent-row {
+    background-color: rgba(131, 131, 131, 0.03);
+}
+
+.percent-col {
+    background: none;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-top-style: solid;
+    border-top-width: 0.5px;
+    border-top-color: rgba(53, 53, 53, 0.1);
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
+    border-bottom-color: rgba(53, 53, 53, 0.1);
+}
+    
+}
+
+#perc-nuetral {
+    border-left-style: solid;
+    border-left-width: 0.5px;
+    border-left-color: rgba(53, 53, 53, 0.1);
+    border-right-style: solid;
+    border-right-width: 0.5px;
+    border-right-color: rgba(53, 53, 53, 0.1);
+}
+
+.reviews {
+    background: rgba(45, 45, 45, 0.0);
+    margin-top: 50px;
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.rev-sect {
+    padding: 20px;
+    background: rgba(45, 45, 45, 0.4);
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 7px;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.userName-box {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 8px;
+    
+    background-color: #EDEDED;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #DEDEDE;
+}
+
+.userName-text {
+    color: #828282;
+    font-size: 33px;
+}

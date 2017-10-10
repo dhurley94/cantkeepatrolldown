@@ -1,0 +1,41 @@
+.form-control {
+    border-style: none;
+    border-color: none;
+    border-color: none;
+}
+
+.center-form {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#troll-search {
+    border-style: solid;
+    border-width: 2px;
+    border-color: #b759ff;
+    border-radius: 6px;
+    box-shadow: 0px 0px 40px black;
+    height: 70px;
+}
+
+#troll-search input {
+    font-size: 25px;
+}
+
+.button-span {
+    width: 10%;
+}
+
+.button-span button {
+    color: #5b5b5b;
+    background: #f7f7f7;
+    border: none;
+    font-size: 25px;
+    padding-left: 4%;
+    padding-right: 4%;
+    text-align: center;
+}
+
+.button-span button:hover {
+    background: #b759ff;
+}
