@@ -30,12 +30,12 @@ centeredSearch.hide();
 
 // hide/show stuff here for testing...
 //$("#search-bar-div").hide();
-$("#search-bar-div").hide();
+$("#search-bar-div").show();
 
 //$("#troll-submit-div").show();
 $("#troll-submit-div").hide();
 
-$(".troll-profile-div").show();
+$(".troll-profile-div").hide();
 //$("#troll-profile-div").show();
 
 $(document).ready(function () {
